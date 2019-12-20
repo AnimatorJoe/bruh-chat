@@ -1,19 +1,19 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <Chatroom>
-    </Chatroom>
+    <PublicMessage>
+    </PublicMessage>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Chatroom from '@/components/Chatroom.vue'
+import PublicMessage from "@/components/PublicMessage.vue"
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    Chatroom
+    PublicMessage
   }
 }
 </script>
