@@ -24,16 +24,23 @@ export default {
   created() {
     // defining call backs for message reception
     SocketInterface.messageHandler("chat-message", (data) => {
-      this.messagesArray.push(data);
+      this.messagesArray.push(data.name + ": " + data.message);
     });
 
-    SocketInterface.messageHandler("new-user", (data) => {
+    SocketInterface.messageHandler("user-joined", (data) => {
       this.messagesArray.push(data + " joined the server");
+    });
+
+    SocketInterface.messageHandler("user-disconnected", (name) => {
+      this.messagesArray.push(name + " left the server");
     });
 
     this.name = prompt("enter your name, please.");
     this.messagesArray.push("you joined the server");
     SocketInterface.sendMessage("new-user", this.name);
+  },
+  destroyed() {
+    // SocketInterface.sendMessage("delete-user", this.name);
   },
   data() {
     return {
@@ -45,8 +52,11 @@ export default {
   },
   methods: {
     sendMessage() {
-      SocketInterface.sendMessage("chat-message", this.message);
-      this.messagesArray.push(this.message);
+      SocketInterface.sendMessage("chat-message", {
+        message: this.message,
+        name: this.name
+      });
+      this.messagesArray.push("you: " + this.message);
       this.message = null;
     }
   }
