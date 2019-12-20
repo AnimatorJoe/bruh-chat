@@ -2,15 +2,15 @@
   <div>
     <div id="message-container">
       <ul>
-        <li v-for="m in messagesArray"> {{ m }} </li>
+        <li v-for="m in messagesArray" v-bind:key="m.id"> {{ m }} </li>
       </ul>
     </div>
     <form id = "send-container" @submit.prevent="onSubmit">
-        <input type="text" v-model="message" id="message-input">
-        <br>
-        <button type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
-          Post
-        </button>
+      <input type="text" v-model="message" id="message-input">
+      <br>
+      <button type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
+        Post
+      </button>
     </form>
   </div>
 </template>
