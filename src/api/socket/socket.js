@@ -1,10 +1,9 @@
 // const io = require("socket.io-client")
 import io from "socket.io-client"
-
 const socket = io("http://localhost:3000")
-// socket.on("chat-message", (data) => {
-//   console.log(data)
-// });
+socket.on("connection-check", (data) => {
+  console.log("Connection Check - Message From Server:\n" + data + "\n" + Date());
+});
 
 // export
 export default {

@@ -1,14 +1,14 @@
 <template>
   <div>
     <div id="message-container">
-        <ul>
-          <li v-for="m in messagesArray"> {{ m + '.' }} </li>
-        </ul>
+      <ul>
+        <li v-for="m in messagesArray"> {{ m }} </li>
+      </ul>
     </div>
-    <form id = "send-container">
+    <form id = "send-container" @submit.prevent="onSubmit">
         <input type="text" v-model="message" id="message-input">
         <br>
-        <button type="submit" @click="sendMessage" id="send-button">
+        <button type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
           Post
         </button>
     </form>
@@ -16,20 +16,24 @@
 </template>
 
 <script>
-import SocketInterface from "@/api/socket/socket.js"
+import SocketInterface from "@/api/socket/socket.js";
+// import prompt from "prompt-async";
 
 export default {
   name: "PublicMessage",
   created() {
-
-
     // defining call backs for message reception
     SocketInterface.messageHandler("chat-message", (data) => {
       this.messagesArray.push(data);
-      console.log(this.messagesArray);
     });
 
+    SocketInterface.messageHandler("new-user", (data) => {
+      this.messagesArray.push(data + " joined the server");
+    });
 
+    this.name = prompt("enter your name, please.");
+    this.messagesArray.push("you joined the server");
+    SocketInterface.sendMessage("new-user", this.name);
   },
   data() {
     return {
