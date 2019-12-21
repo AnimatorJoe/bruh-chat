@@ -1,15 +1,18 @@
 <template>
-  <div>
-    <div id="message-container">
+  <div class="container">
+    <div class="message-render">
       <ul>
-        <li v-for="m in messagesArray" v-bind:key="m.id"> {{ m }} </li>
+        <li v-for="m in messagesArray" v-bind:key="m.id">
+          {{ m }} 
+        </li>
       </ul>
     </div>
-    <form id = "send-container" @submit.prevent="onSubmit">
-      <input type="text" v-model="message" id="message-input">
-      <br>
-      <button type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
-        Post
+    <form class = "general-form" @submit.prevent="onSubmit">
+      <div class="form-item">
+        <input type="text" v-model="message" id="message-input">
+      </div>
+      <button class="button" type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
+        Send
       </button>
     </form>
   </div>
@@ -36,6 +39,9 @@ export default {
     });
 
     this.name = prompt("enter your name, please.");
+    while(this.name === "" || this.name === null) {
+      this.name = prompt("Bro, do you not know how to read lmao. Let's try again.\nEnter your name, PLEASE.");
+    }
     this.messagesArray.push("you joined the server");
     SocketInterface.sendMessage("new-user", this.name);
   },
@@ -52,6 +58,7 @@ export default {
   },
   methods: {
     sendMessage() {
+      if(this.message === null) return
       SocketInterface.sendMessage("chat-message", {
         message: this.message,
         name: this.name
@@ -65,32 +72,49 @@ export default {
 
 <style scoped>
 body {
+    /* background-color: #111; */
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
 }
-#message-container {
-    width: 80%;
-    max-width: 1200px;
+
+.button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
 }
-#message-container div {
-    background-color: #CCC;
-    padding: 5px;
+
+.button:hover {
+    background-color:#555;
 }
-#message-container div:nth-child(2n) {
-    background-color: #FFF;
+
+.container {
+    width: 50%;
+    margin: auto;
 }
-/* #send-container {
-    position: fixed;
-    padding-bottom: 30px;
-    bottom: 0;
-    background-color: white;
-    max-width: 1200px;
-    width: 80%;
-    display: flex;
+
+.general-form .form-item {
+    padding-bottom: 15px;
 }
-#message-input {
-    flex-grow: 1;
-} */
+
+.general-form input[type = "text"], .general-form textarea {
+    padding: 8px;
+    width: 100%;
+}
+
+.message-render {
+    padding: 0px;
+    padding: 10px 10px 15px 10px;
+    background-color: #fff;
+}
+
+.message-render ul {
+    padding: 0px;
+    /* border: 1px #555 solid; */
+    padding: 0px;
+    list-style: none;
+}
+
 </style>

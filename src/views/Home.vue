@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <PublicMessage>
-    </PublicMessage>
+    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <PublicMessage/>
   </div>
 </template>
 
