@@ -7,7 +7,7 @@
         </li>
       </ul>
     </div>
-    <form class = "general-form" @submit.prevent="onSubmit">
+    <form class = "general-form" @submit.prevent>
       <div class="form-item">
         <input type="text" v-model="message" id="message-input">
       </div>
