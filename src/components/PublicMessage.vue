@@ -11,7 +11,7 @@
       <div class="form-item">
         <input type="text" v-model="message" id="message-input">
       </div>
-      <button class="button" type="submit" @click="sendMessage" id="send-button" @submit.prevent="onSubmit">
+      <button class="button" type="submit" @click="sendMessage" id="send-button">
         Send
       </button>
     </form>
@@ -46,7 +46,7 @@ export default {
     SocketInterface.sendMessage("new-user", this.name);
   },
   destroyed() {
-    // SocketInterface.sendMessage("delete-user", this.name);
+    console.log("cleared");
   },
   data() {
     return {
