@@ -15,15 +15,11 @@ import "firebase/auth";
 
 export default {
     created() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.user = user;
-            this.loggedIn = !!user;
-        })
+        
     },
-    data() {
-        return {
-            loggedIn: false,
-            user: null,
+    computed: {
+        loggedIn() {
+            return this.$store.state.loggedIn;
         }
     },
     methods: {

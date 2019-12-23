@@ -3,14 +3,25 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> | 
-      <router-link to="/profile">Profile</router-link>
+      <router-link to="/register">Register</router-link> |
+      <router-link to="/profile">Profile</router-link> |
+      <router-link to="/authonly">Secret</router-link> 
     </div>
     <keep-alive>
       <router-view/>
     </keep-alive>
   </div>
 </template>
+
+<script>
+import firebase from "firebase/app";
+import firebaseConfig from "./firebase/firebaseConfig.js";
+
+export default {
+  created() {
+  }
+}
+</script>
 
 <style>
 #app {
