@@ -13,16 +13,15 @@ firebase.auth().onAuthStateChanged(user => {
   console.log("Auth state change");
   console.log(user);
   store.commit("changeCurrentUser", user);
+  // App init
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount("#app");
 })
 
 // Vue prototypes and settings
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = true;
-
-// App init
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
 
