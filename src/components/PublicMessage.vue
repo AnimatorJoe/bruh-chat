@@ -38,6 +38,11 @@ export default {
       this.messagesArray.push(name + " left the server");
     });
 
+    if(this.$store.state.loggedIn) {
+      this.name = this.$store.state.user.email;
+      return;
+    }
+    
     this.name = prompt("enter your name, please.");
     while(this.name === "" || this.name === null) {
       this.name = prompt("Bro, do you not know how to read lmao. Let's try again.\nEnter your name, PLEASE.");

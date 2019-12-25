@@ -27,23 +27,24 @@ app.listen(port, () => {"Express server running on port " + port})
 // setting up socket.io
 const io = require("socket.io")(3000);
 
-require("socketio-auth")(io, {
-  authenticate: async function (socket, data) {
-    try {
-      //get credentials sent by the client
-      const { authToken } = data;
-      const userInfo = await admin.auth().verifyIdToken(authToken);
-      socket.emit("connection-check", "Authenticaion complete, socket now listed as authenticated");
-      authenticatedConnections.push(socket.id);
-    } catch (err) {
-      socket.emit("connection-check", ("authentication failed:\n" + err));
-    }
-  }
-});
+// require("socketio-auth")(io, {
+//   authenticate: async function (socket, data) {
+//     try {
+//       //get credentials sent by the client
+//       const { authToken } = data;
+//       const userInfo = await admin.auth().verifyIdToken(authToken);
+//       socket.emit("connection-check", "Authenticaion complete, socket now listed as authenticated");
+//       authenticatedConnections.push(socket.id);
+//     } catch (err) {
+//       socket.emit("connection-check", ("authentication failed:\n" + err));
+//     }
+//   }
+// });
 
 io.on("connection", (socket) => {
   socket.emit("connection-check", "connection established");
   socket.on("chat-message", (data) => {
+    console.log(data);
     socket.broadcast.emit("chat-message", data);
   });
   socket.on("new-user", (name) => {

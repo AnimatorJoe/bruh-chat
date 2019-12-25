@@ -53,12 +53,6 @@ const router = new VueRouter({
 // prevent unauthenticated users from accessing pages requiring authentication
 router.beforeEach((to, from, next) => {
   const reqAuth = to.matched.some(record => record.meta.requiresAuth);
-  console.log("from")
-  console.log(from)
-  console.log("to")
-  console.log(to)
-  console.log("authed")
-  console.log(store.state.loggedIn)
   if(!store.state.loggedIn && reqAuth) {
     next("/login");
   } else {
