@@ -46,24 +46,25 @@ io.on("connection", (socket) => {
   });
 });
 
-// socketAuth(io, {
-//   authenticate: async function (socket, data, callback) {
-//     try {
-//       //get credentials sent by the client
-//       const { token } = data;
-//       const userInfo = await admin.auth().verifyIdToken(token);
-//       socket.emit("connection-check", "Authenticaion complete, socket now listed as authenticated");
-//       authenticatedConnections.push(socket.id);
-//       console.log(authenticatedConnections);
-//       console.log(users);
-//       console.log("e");
-//       return callback(null, console.log("success"));
-//     } catch (err) {
-//       delete authenticatedConnections[socket.id];
-//       socket.emit("connection-check", ("authentication failed:\n" + err));
-//       return callback(err);
-//     }
-//   },
-//   timeout: "none"
-// });
+socketAuth(io, {
+  authenticate: async function (socket, data, callback) {
+    try {
+      //get credentials sent by the client
+      const { token } = data;
+      const userInfo = await admin.auth().verifyIdToken(token);
+      socket.emit("connection-check", "Authenticaion complete, socket now listed as authenticated");
+      authenticatedConnections.push(socket.id);
+      return callback(null, true);
+    } catch (err) {
+      delete authenticatedConnections[socket.id];
+      socket.emit("connection-check", ("authentication failed:\n" + err));
+      return callback(err);
+    }
+  },
+  postAuthenticate: function (socket, data) {
+    console.log("it's chill");
+  },
+
+  timeout: "none"
+});
 

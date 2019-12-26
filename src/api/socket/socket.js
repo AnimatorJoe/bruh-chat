@@ -10,7 +10,6 @@ socket.on("connection-check", async (data) => {
 // export
 export default {
   sendMessage(type, value) {
-    console.log(value);
     socket.emit(type, value);
   },
   messageHandler(type, callback) {

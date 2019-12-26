@@ -27,7 +27,6 @@ export default {
   created() {
     // defining call backs for message reception
     SocketInterface.messageHandler("chat-message", (data) => {
-      console.log(data);
       this.messagesArray.push(data.name + ": " + data.message);
     });
 
@@ -69,7 +68,7 @@ export default {
         message: this.message,
         name: this.name
       });
-      this.messagesArray.push("you: " + this.message);
+      this.messagesArray.push(this.name + ": " + this.message);
       this.message = null;
     }
   }
