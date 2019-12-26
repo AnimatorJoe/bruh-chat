@@ -27,6 +27,7 @@ export default {
   created() {
     // defining call backs for message reception
     SocketInterface.messageHandler("chat-message", (data) => {
+      console.log(data);
       this.messagesArray.push(data.name + ": " + data.message);
     });
 
