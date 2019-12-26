@@ -40,13 +40,13 @@ export default {
 
     if(this.$store.state.loggedIn) {
       this.name = this.$store.state.user.email;
-      return;
+    } else {
+      this.name = prompt("enter your name, please.");
+      while(this.name === "" || this.name === null) {
+        this.name = prompt("Bro, do you not know how to read lmao. Let's try again.\nEnter your name, PLEASE.");
+      }
     }
     
-    this.name = prompt("enter your name, please.");
-    while(this.name === "" || this.name === null) {
-      this.name = prompt("Bro, do you not know how to read lmao. Let's try again.\nEnter your name, PLEASE.");
-    }
     this.messagesArray.push("you joined the server");
     SocketInterface.sendMessage("new-user", this.name);
   },
