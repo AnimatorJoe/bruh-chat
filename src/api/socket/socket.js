@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import firebase from "firebase/app";
+import store from "@/store";
 import "firebase/auth";
 
 const socket = io("http://localhost:3000");
@@ -17,10 +18,18 @@ export default {
   },
   async authSocket() {
     try {
-      const token = await firebase.auth().currentUser.getIdToken();
-      socket.emit("authentication", {
-        token: token
-      });
+      if(store.state.loggedIn) {
+        const token = await firebase.auth().currentUser.getIdToken();
+        socket.emit("authentication", {
+          loggedIn: true,
+          token: token
+        });
+      } else {
+        socket.emit("authentication", {
+          loggedIn: false,
+          token: null
+        });
+      }
     } catch (err) {
       console.log(err);
     };
