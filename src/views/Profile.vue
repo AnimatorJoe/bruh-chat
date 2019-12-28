@@ -20,6 +20,9 @@ import "firebase/auth";
 
 export default {
     created() {
+        this.user = firebase.auth().currentUser;
+        this.displayName = this.user.displayName;
+        console.log(this.user);
     },
     data() {
         return {
@@ -31,11 +34,6 @@ export default {
         loggedIn() {
             return this.$store.state.loggedIn;
         }
-    },
-    created() {
-        this.user = firebase.auth().currentUser;
-        this.displayName = this.user.displayName;
-        console.log(this.user);
     },
     methods: {
         async signOut() {
