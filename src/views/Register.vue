@@ -25,11 +25,14 @@ export default {
     methods: {
         async register() {
             try { 
-                const user = firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+                await firebase.auth().createUserWithEmailAndPassword(this.email, this.password);
+                const user = firebase.auth().currentUser;
+                user.updateProfile({displayName: "user " + user.uid});
+                console.log("new user registered:");
                 console.log(user);
                 this.$router.replace({name:"profile"});
             } catch (err) {
-                erorr = err;
+                error = err;
                 console.log(err);
             }
         }

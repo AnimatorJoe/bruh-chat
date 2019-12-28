@@ -39,7 +39,7 @@ export default {
     });
 
     if(this.$store.state.loggedIn) {
-      this.name = this.$store.state.user.email;
+      this.name = this.$store.state.user.displayName;
     } else {
       this.name = prompt("enter your name, please.");
       while(this.name === "" || this.name === null) {
