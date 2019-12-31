@@ -8,19 +8,16 @@
       </ul>
     </div>
     <form class = "general-form" @submit.prevent>
-      <div class="form-item">
-        <input type="text" v-model="message" id="message-input">
-      </div>
-      <button class="button" type="submit" @click="sendMessage" id="send-button">
-        Send
-      </button>
+      <div class="form-item"><input type="text" v-model="message" id="message-input"></div>
+      <button class="button" type="submit" @click="sendMessage" id="send-button">Send</button>
     </form>
   </div>
 </template>
 
 <script>
 import SocketInterface from "@/api/socket/socket.js";
-// import prompt from "prompt-async";
+require("@/assets/styles/chatroom.css");
+require("@/assets/styles/forms.css");
 
 export default {
   name: "PublicMessage",
@@ -83,43 +80,4 @@ body {
     display: flex;
     /* justify-content: center; */
 }
-
-.button {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 30px;
-    border: none;
-}
-
-.button:hover {
-    background-color:#555;
-}
-
-.container {
-    width: 50%;
-    margin: auto;
-}
-
-.general-form .form-item {
-    padding-bottom: 15px;
-}
-
-.general-form input[type = "text"], .general-form textarea {
-    padding: 8px;
-    width: 100%;
-}
-
-.message-render {
-    padding: 0px;
-    padding: 10px 10px 15px 10px;
-    background-color: #fff;
-}
-
-.message-render ul {
-    padding: 0px;
-    /* border: 1px #555 solid; */
-    padding: 0px;
-    list-style: none;
-}
-
 </style>

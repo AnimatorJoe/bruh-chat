@@ -1,11 +1,11 @@
 <template>
-    <div>
-        Login
+    <div class="container">
         <div v-if="error" class="error">{{erorr.message}}</div>
-        <form @submit.prevent="login">
-            <input type="email" v-model="email" placeholder="noobmaster69@protonmail.com">
-            <input type="password" v-model="password">
-            <button type="submit">Login</button>
+        <form class="general-form" @submit.prevent="login">
+            <div class="form-item">Login</div>
+            <div class="form-item"><input type="email" v-model="email" placeholder="noobmaster69@protonmail.com"></div>
+            <div class="form-item"><input type="password" v-model="password" placeholder="password"></div>
+            <div class="form-item"><button class="button" type="submit">Login</button></div>
         </form>
     </div>
 </template>
@@ -13,6 +13,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
+require("@/assets/styles/forms.css");
 
 export default {
     data() {
