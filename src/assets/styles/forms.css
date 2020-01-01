@@ -5,9 +5,21 @@
     border: none;
 }
 
+.button-red:hover {
+    background-color:#dd5555;
+}
+
+.button-red {
+    background-color: #ee3333;
+    color: #fff;
+    padding: 10px 30px;
+    border: none;
+}
+
 .button:hover {
     background-color:#555;
 }
+
 
 .container {
     width: 50%;

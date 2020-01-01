@@ -5,8 +5,10 @@
                 <div class="form-item">Status: Logged In, this is your profile.</div>
                 <div class="form-item"><label>Username: </label></div>
                 <div class="form-item"><input type="text" v-model="displayName"></div>
+                <div class="form-item"><label>Email: </label></div>
+                <div class="form-item"><input type="text" v-model="email" disabled></div>
                 <div class="form-item"><button class="button" @click="updateProfile">Update Profile</button></div>
-                <div class="form-item"><button class="button" @click="signOut">Sign Out</button></div>
+                <div class="form-item"><button class="button-red" @click="signOut">Sign Out</button></div>
             </div>
         </span>
         <span v-else>
@@ -26,12 +28,14 @@ export default {
     created() {
         this.user = firebase.auth().currentUser;
         this.displayName = this.user.displayName;
+        this.email = this.user.email;
         console.log(this.user);
     },
     data() {
         return {
             user: null,
             displayName: null,
+            email: null,
         }
     },
     computed: {
